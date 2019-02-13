@@ -45,11 +45,13 @@ namespace Api.IntegrationTest
             var result = await Client.GetAsync("/values/1");
 
             result.EnsureSuccessStatusCode();
+            var content = await result.Content.ReadAsStringAsync();
+
+            
             //var deserializedResult = JsonConvert.DeserializeObject<Value>(await result.Content.ReadAsStringAsync());
 
             //assert
-            //Assert.AreEqual(1337, deserializedResult.Epicness);
-
+            Assert.AreEqual("", content);
         }
     }
 }
