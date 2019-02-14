@@ -7,14 +7,11 @@ namespace Api.IntegrationTest
 {
     public class TestStartup : Startup
     {
-        public TestStartup(IConfiguration configuration) : base(configuration)
-        {
-        }
+        public TestStartup(IConfiguration configuration) : base(configuration) {}
 
         protected override void ConfigureDatabase(IServiceCollection services)
         {
-            const string databaseName = "My";
-            services.AddDbContext<MyContext>(o => o.UseInMemoryDatabase(databaseName));
+            services.AddDbContext<MyContext>(o => o.UseInMemoryDatabase("MyDatabaseName"));
         }
     }
 }

@@ -1,5 +1,4 @@
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Data;
 using Data.Model;
@@ -20,7 +19,6 @@ namespace Api.IntegrationTest
         public TestServer Server { get; set; }
         public MyContext Context { get; set; }
 
-
         [TestInitialize]
         public void Init()
         {
@@ -33,7 +31,6 @@ namespace Api.IntegrationTest
             Context = Server.Host.Services.GetRequiredService<MyContext>();
         }
 
-
         [TestMethod]
         public async Task TestMethod1()
         {
@@ -44,10 +41,7 @@ namespace Api.IntegrationTest
 
             //act
             var result = await Client.GetAsync("/values/1");
-
             result.EnsureSuccessStatusCode();
-
-
             var deserializedResult = JsonConvert.DeserializeObject<Value>(await result.Content.ReadAsStringAsync());
 
             //assert

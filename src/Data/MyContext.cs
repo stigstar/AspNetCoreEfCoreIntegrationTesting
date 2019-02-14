@@ -7,7 +7,6 @@ namespace Data
     {
         public MyContext()
         {
-
         }
         public MyContext(DbContextOptions<MyContext> options) : base(options)
         {
