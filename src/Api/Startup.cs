@@ -9,13 +9,6 @@ namespace Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvcCore().AddJsonFormatters();
@@ -29,7 +22,7 @@ namespace Api
 
         protected virtual void ConfigureDatabase(IServiceCollection services)
         {
-            services.AddDbContext<MyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MyConnectionString")));
+            services.AddDbContext<MyContext>(options => options.UseSqlServer("MyConnectionString"));
         }
     }
 }
