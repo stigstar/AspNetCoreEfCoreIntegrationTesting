@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Data;
+﻿using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,9 +13,8 @@ namespace Api.IntegrationTest
 
         protected override void ConfigureDatabase(IServiceCollection services)
         {
-            var databaseName = "My";
-            services.AddDbContext<MyContext>(o =>
-                o.UseInMemoryDatabase(databaseName));
+            const string databaseName = "My";
+            services.AddDbContext<MyContext>(o => o.UseInMemoryDatabase(databaseName));
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Data;
 using Data.Model;
@@ -37,7 +38,7 @@ namespace Api.IntegrationTest
         public async Task TestMethod1()
         {
             //arrange
-            await Context.AddAsync(new Value { Id = 1, Epicness = 1337 }).ConfigureAwait(false);
+            await Context.AddAsync(new Value {Id = 1, Epicness = 1337});
             await Context.SaveChangesAsync();
 
 
@@ -45,13 +46,12 @@ namespace Api.IntegrationTest
             var result = await Client.GetAsync("/values/1");
 
             result.EnsureSuccessStatusCode();
-            var content = await result.Content.ReadAsStringAsync();
 
-            
-            //var deserializedResult = JsonConvert.DeserializeObject<Value>(await result.Content.ReadAsStringAsync());
+
+            var deserializedResult = JsonConvert.DeserializeObject<Value>(await result.Content.ReadAsStringAsync());
 
             //assert
-            Assert.AreEqual("", content);
+            Assert.AreEqual(1337, deserializedResult.Epicness);
         }
     }
 }
